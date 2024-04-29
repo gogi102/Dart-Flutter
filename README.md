@@ -1,1 +1,1 @@
-# Dart와 Flutter 프로적트들
+# Dart와 Flutter 프로젝트들
