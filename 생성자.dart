@@ -8,8 +8,8 @@ void SayName(){
   }
 }
 void main(){
-  Student211 student211 = Student211('양준석');
-  Student211 student2112 = Student211('박시우');
+  Student211 student211 = Student211('장연준');
+  Student211 student2112 = Student211('양준석');
 
   student211.SayName();
   student2112.SayName();
