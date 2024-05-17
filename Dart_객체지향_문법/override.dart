@@ -35,7 +35,6 @@ class jangName extends yangName {
 void main() {
   jangName jangName1 = jangName('장연준', 14);
   jangName1.sayName();
-  jangName1.sayNumber(); //오버라이드가 우선 순위를 갖기 때문에 부모 메서드에 활당된 14가 아닌
-  //오버라이드로 지정해준 18이 나온다
+  jangName1.sayNumber(); //오버라이드가 우선 순위를 갖기 때문에 부모 메서드의 출력이 아닌 오버리이드 된 18이 결과값으로 나오게 된다
   jangName1.sayMale();
 }
