@@ -26,7 +26,7 @@ class jangName extends yangName {
     print('저는 남자입니다');
   }
 
-  @override
+  @override //@override 키워드 생략 가능
   void sayNumber() {
     print('저는 18번 입니다');
   }
