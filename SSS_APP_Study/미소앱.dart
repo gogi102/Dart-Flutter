@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 Color misoPrimaryColor = const Color.fromRGBO(38, 103, 240, 1);
 void main() {
@@ -265,7 +266,105 @@ class MisoThirdPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: misoPrimaryColor,
+      body: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Image.network(
+                    "https://i.ibb.co/rxzkRTD/146201680-e1b73b36-aa1e-4c2e-8a3a-974c2e06fa9d.png",
+                  ),
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 64,
+                  ),
+                  const Text(
+                    textAlign: TextAlign.center,
+                    "친구 추천할 때마다\n10,000원 할인쿠폰 지급!",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 38,
+                  ),
+                  Positioned(
+                    child: GestureDetector(
+                      onTap: () {
+                        print("자세히 눌림");
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "자세히 보기",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                bottom: 42,
+                child: GestureDetector(
+                  onTap: () {
+                    print("친추 클릭됨");
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 24,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(64),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.redeem,
+                          color: misoPrimaryColor,
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          "친구 추천하기",
+                          style: TextStyle(
+                            color: misoPrimaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
