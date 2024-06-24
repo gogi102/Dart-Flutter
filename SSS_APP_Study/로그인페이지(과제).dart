@@ -44,103 +44,132 @@ class _CreatePageState extends State<LoginPage> {
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              autofocus: true,
-              controller: idController,
-              decoration: InputDecoration(
-                label: const Text("아이디"),
-                errorText: idError,
+      body: SingleChildScrollView(
+        // 이미지로 인한 키보드 오버플로우 방지
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 32,
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            TextField(
-              autofocus: true,
-              controller: passwordController,
-              decoration: InputDecoration(
-                label: const Text("비밀번호"),
-                errorText: passwordError,
+              Image.network(
+                "https://i.ibb.co/CwzHq4z/trans-logo-512.png",
+                width: 150,
+                height: 180,
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            TextField(
-              autofocus: true,
-              controller: phoneController,
-              decoration: InputDecoration(
-                label: const Text("전화번호"),
-                errorText: phoneError,
+              const SizedBox(
+                height: 50,
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton(
-                onPressed: () {
-                  String id = idController.text;
-                  String password = passwordController.text;
-                  String phone = phoneController.text;
+              TextField(
+                autofocus: true,
+                controller: idController,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  label: const Text(
+                    "ID",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  errorText: passwordError,
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              TextField(
+                autofocus: true,
+                controller: passwordController,
+                obscureText: true, // 텍스트 숨기기
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  label: const Text(
+                    "Password",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  errorText: passwordError,
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              TextField(
+                autofocus: true,
+                controller: phoneController,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  label: const Text(
+                    "Phone Number",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  errorText: passwordError,
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              SizedBox(
+                width: 120,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent),
+                  onPressed: () {
+                    String id = idController.text;
+                    String password = passwordController.text;
+                    String phone = phoneController.text;
 
-                  String trueId = "yjs1234";
-                  String truePassword = "1234";
-                  String truePhone = "01012341234";
+                    String trueId = "yjs1234";
+                    String truePassword = "1234";
+                    String truePhone = "01012341234";
 
-                  if (id.isEmpty) {
-                    setState(() {
-                      idError = "아이디를 입력해주세요";
-                      passwordError = null;
-                      phoneError = null;
-                    });
-                  } else if (password.isEmpty) {
-                    setState(() {
-                      passwordError = "비밀번호를 입력해주세요";
-                      idError = null;
-                      phoneError = null;
-                    });
-                  } else if (phone.isEmpty) {
-                    setState(() {
-                      phoneError = "전화번호를 입력해주세요";
-                      idError = null;
-                      passwordError = null;
-                    });
-                  } else if (id == trueId &&
-                      password == truePassword &&
-                      phone == truePhone) {
-                    setState(() {
-                      idError = null;
-                      passwordError = null;
-                      phoneError = null;
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Task(),
-                      ),
-                    );
-                  } else {
-                    Membership_information(context);
-                  }
-                },
-                child: const Text(
-                  "로그인",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    if (id.isEmpty) {
+                      setState(() {
+                        idError = "아이디를 입력해주세요";
+                        passwordError = null;
+                        phoneError = null;
+                      });
+                    } else if (password.isEmpty) {
+                      setState(() {
+                        passwordError = "비밀번호를 입력해주세요";
+                        idError = null;
+                        phoneError = null;
+                      });
+                    } else if (phone.isEmpty) {
+                      setState(() {
+                        phoneError = "전화번호를 입력해주세요";
+                        idError = null;
+                        passwordError = null;
+                      });
+                    } else if (id == trueId &&
+                        password == truePassword &&
+                        phone == truePhone) {
+                      setState(() {
+                        idError = null;
+                        passwordError = null;
+                        phoneError = null;
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Task(),
+                        ),
+                      );
+                    } else {
+                      Membership_information(context);
+                    }
+                  },
+                  child: const Text(
+                    "로그인",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
