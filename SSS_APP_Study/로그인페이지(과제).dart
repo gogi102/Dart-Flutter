@@ -124,19 +124,19 @@ class _CreatePageState extends State<LoginPage> {
 
                     if (id.isEmpty) {
                       setState(() {
-                        idError = "아이디를 입력해주세요";
+                        idError = "ID를 입력해주세요";
                         passwordError = null;
                         phoneError = null;
                       });
                     } else if (password.isEmpty) {
                       setState(() {
-                        passwordError = "비밀번호를 입력해주세요";
+                        passwordError = "Password를 입력해주세요";
                         idError = null;
                         phoneError = null;
                       });
                     } else if (phone.isEmpty) {
                       setState(() {
-                        phoneError = "전화번호를 입력해주세요";
+                        phoneError = "PhoneNumber를 입력해주세요";
                         idError = null;
                         passwordError = null;
                       });
@@ -156,6 +156,25 @@ class _CreatePageState extends State<LoginPage> {
                       );
                     } else {
                       Membership_information(context);
+                      if (id != trueId) {
+                        setState(() {
+                          idError = "옳지 않은 ID입니다";
+                          passwordError = null;
+                          phoneError = null;
+                        });
+                      } else if (password != truePassword) {
+                        setState(() {
+                          passwordError = "옳지 않은 Password입니다";
+                          idError = null;
+                          phoneError = null;
+                        });
+                      } else if (phone != truePhone) {
+                        setState(() {
+                          phoneError = "옳지 않은 PhoneNumber입니다";
+                          idError = null;
+                          passwordError = null;
+                        });
+                      }
                     }
                   },
                   child: const Text(
@@ -178,23 +197,24 @@ class _CreatePageState extends State<LoginPage> {
 
 void Membership_information(BuildContext context) {
   showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("옳지않은 정보입니다"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text(
-                "확인",
-                style: TextStyle(color: Colors.red),
-              ),
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("옳지않은 정보입니다"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              "확인",
+              style: TextStyle(color: Colors.red),
             ),
-          ],
-        );
-      });
+          ),
+        ],
+      );
+    },
+  );
 }
 
 class Task extends StatelessWidget {
