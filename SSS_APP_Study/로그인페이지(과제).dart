@@ -70,7 +70,7 @@ class _CreatePageState extends State<LoginPage> {
                     "ID",
                     style: TextStyle(color: Colors.grey),
                   ),
-                  errorText: passwordError,
+                  errorText: idError,
                 ),
               ),
               const SizedBox(
@@ -101,7 +101,7 @@ class _CreatePageState extends State<LoginPage> {
                     "Phone Number",
                     style: TextStyle(color: Colors.grey),
                   ),
-                  errorText: passwordError,
+                  errorText: phoneError,
                 ),
               ),
               const SizedBox(
