@@ -200,15 +200,27 @@ void Membership_information(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text("옳지않은 정보입니다"),
+        backgroundColor: Colors.blueAccent,
+        title: const Center(
+          child: Text(
+            " 옳지않은 정보입니다",
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text(
-              "확인",
-              style: TextStyle(color: Colors.red),
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "확인",
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+              ),
             ),
           ),
         ],
