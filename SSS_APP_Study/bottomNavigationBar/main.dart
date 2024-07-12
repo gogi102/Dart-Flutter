@@ -36,7 +36,7 @@ class _MisoState extends State<Miso> {
         index: currentIndex,
         children: const [
           homePage(),
-          todoPage(),
+          TodoPage(),
           informationPage(),
         ],
       ),

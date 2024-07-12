@@ -1,29 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Bucket {
-  String job;
+class ToDo {
+  String things;
   bool isDone;
 
-  Bucket(this.job, this.isDone);
+  ToDo(this.things, this.isDone);
 }
 
-class todoPage extends StatefulWidget {
-  const todoPage({super.key});
+class TodoPage extends StatefulWidget {
+  const TodoPage({super.key});
 
   @override
-  State<todoPage> createState() => _todoState();
+  State<TodoPage> createState() => _HomePageState();
 }
 
-class _todoState extends State<todoPage> {
-  List<Bucket> bucketList = [];
+class _HomePageState extends State<TodoPage> {
+  List<ToDo> ToDoList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "버킷 리스트",
+          "To Do 리스트",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -32,19 +32,19 @@ class _todoState extends State<todoPage> {
         backgroundColor: Colors.blueAccent,
       ),
       body: Center(
-        child: bucketList.isEmpty
-            ? const Text("버킷 리스트를 작성해주세요.")
+        child: ToDoList.isEmpty
+            ? const Text("리스트를 작성해주세요.")
             : ListView.builder(
-                itemCount: bucketList.length,
+                itemCount: ToDoList.length,
                 itemBuilder: (context, index) {
-                  Bucket bucket = bucketList[index];
+                  ToDo todo = ToDoList[index];
                   return ListTile(
                     title: Text(
-                      bucket.job,
+                      todo.things,
                       style: TextStyle(
                         fontSize: 24,
-                        color: bucket.isDone ? Colors.grey : Colors.black,
-                        decoration: bucket.isDone
+                        color: todo.isDone ? Colors.grey : Colors.black,
+                        decoration: todo.isDone
                             ? TextDecoration.lineThrough
                             : TextDecoration.none,
                       ),
@@ -61,7 +61,7 @@ class _todoState extends State<todoPage> {
                     onTap: () {
                       // 클릭시
                       setState(() {
-                        bucket.isDone = !bucket.isDone;
+                        todo.isDone = !todo.isDone;
                       });
                     },
                   );
@@ -71,16 +71,16 @@ class _todoState extends State<todoPage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () async {
-          String? job = await Navigator.push(
+          String? things = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const CreatePage(),
             ),
           );
-          if (job != null) {
-            Bucket newBucket = Bucket(job, false);
+          if (things != null) {
+            ToDo newTodo = ToDo(things, false);
             setState(() {
-              bucketList.add(newBucket);
+              ToDoList.add(newTodo);
             });
           }
         },
@@ -104,7 +104,7 @@ class _todoState extends State<todoPage> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    bucketList.removeAt(index);
+                    ToDoList.removeAt(index);
                   });
                   Navigator.pop(context);
                 },
@@ -135,7 +135,7 @@ class _CreatePageState extends State<CreatePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "버킷리스트 작성",
+          "ToDo리스트 작성",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -151,7 +151,7 @@ class _CreatePageState extends State<CreatePage> {
               autofocus: true,
               controller: textController,
               decoration: InputDecoration(
-                hintText: "하고 싶은 일을 입력하세요",
+                hintText: "해야 할 일을 입력하세요",
                 errorText: error,
               ),
             ),
@@ -163,9 +163,9 @@ class _CreatePageState extends State<CreatePage> {
               height: 48,
               child: ElevatedButton(
                 onPressed: () {
-                  String job = textController.text;
+                  String things = textController.text;
 
-                  if (job.isEmpty) {
+                  if (things.isEmpty) {
                     setState(() {
                       error = "내용을 입력해주세요";
                     });
@@ -173,7 +173,7 @@ class _CreatePageState extends State<CreatePage> {
                     setState(() {
                       error = null;
                     });
-                    Navigator.pop(context, job);
+                    Navigator.pop(context, things);
                   }
                 },
                 child: const Text(
