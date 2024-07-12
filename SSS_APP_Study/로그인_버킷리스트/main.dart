@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Log_in.dart';
+import 'package:flutter_application_1/homePage.dart';
+import 'package:flutter_application_1/informations.dart';
+import 'package:flutter_application_1/to_do.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,72 +14,60 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: Miso(),
     );
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class Miso extends StatefulWidget {
+  const Miso({super.key});
 
+  @override
+  State<Miso> createState() => _MisoState();
+}
+
+class _MisoState extends State<Miso> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "21113_양준석",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+      body: IndexedStack(
+        // 메뉴를 이동시 초기화를 막아줌?
+        index: currentIndex,
+        children: const [
+          homePage(),
+          TodoPage(),
+          informationPage(),
+        ],
       ),
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-              ),
-              const Text(
-                textAlign: TextAlign.center,
-                "To_Do_List 작성하기",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
-                ),
-              ),
-              const SizedBox(
-                height: 80,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "로그인 하러가기",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              )
-            ],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex, // 현재 보여주는 탭
+        onTap: (newIndex) {
+          print("selected newIndex : $newIndex");
+          // 다른 페이지로 이동
+          setState(() {
+            currentIndex = newIndex;
+          });
+        },
+        selectedItemColor: Colors.blueAccent, // 선택됬을때
+        unselectedItemColor: Colors.white, // 선택되지 않았을때
+        backgroundColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: "홈",
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_outlined),
+            label: "Todo",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: "내정보",
+          ),
+        ],
       ),
     );
   }
